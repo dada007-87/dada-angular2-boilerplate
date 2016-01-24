@@ -77,25 +77,19 @@ gulp.task('typescript', [], function () {
 
     gulp.src(src)
         .pipe(ts({
+            typescript: require("typescript"),
             target: "ES5",
             module: "system",
             moduleResolution: "node",
-            sourceMap: true,
+            sourceMap: false,
             emitDecoratorMetadata: true,
             experimentalDecorators: true,
-            removeComments: false,
-            noImplicitAny: false
-        }))
-        .pipe(uglifyjs(jsName, {
-            mangle: false,
-            output: {
-                beautify: true
-            }
+            removeComments: true,
+            noImplicitAny: false,
+            outFile: jsName
         }))
         .pipe(gulp.dest(dest))
-        .pipe(uglifyjs(minJsName, {
-            mangle: false
-        }))
+        .pipe(uglifyjs(minJsName))
         .pipe(gulp.dest(dest));
 
     //gulp.src(src)

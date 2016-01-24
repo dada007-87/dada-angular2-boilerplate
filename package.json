@@ -18,6 +18,7 @@
     "gulp-uglifyjs": "0.6.2",
     "gulp-typescript": "2.10.0",
     "gulp-sass": "2.1.1",
-    "gulp-rename": "1.2.2"
+    "gulp-rename": "1.2.2",
+    "typescript": "^1.8.0-dev.20160124"
   }
 }

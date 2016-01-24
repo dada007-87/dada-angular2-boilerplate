@@ -4,7 +4,6 @@ var fs = require('fs'),
     uglifyjs = require('gulp-uglifyjs'),
     sass = require('gulp-sass'),
     ts = require('gulp-typescript'),
-    tfs = require('gulp-tfs-checkout'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat');
 
@@ -26,12 +25,6 @@ var paths = {
     }
 };
 
-gulp.task('checkout', function () {
-    return gulp.src([
-            paths.stylesheets.dest + "*.css",
-            paths.javascripts.dest + "*.js"
-    ]).pipe(tfs());
-});
 
 gulp.task('sass', [], function () {
     var name = paths.stylesheets.name,
@@ -83,11 +76,44 @@ gulp.task('typescript', [], function () {
     deleteFile(dest + minJsName);
 
     gulp.src(src)
-        .pipe(ts({ out: jsName }))
-        .js
+        .pipe(ts({
+            target: "ES5",
+            module: "system",
+            moduleResolution: "node",
+            sourceMap: true,
+            emitDecoratorMetadata: true,
+            experimentalDecorators: true,
+            removeComments: false,
+            noImplicitAny: false
+        }))
+        .pipe(uglifyjs(jsName, {
+            mangle: false,
+            output: {
+                beautify: true
+            }
+        }))
         .pipe(gulp.dest(dest))
-        .pipe(uglifyjs(minJsName, {mangle: false, compress: false}))
-	    .pipe(gulp.dest(dest));
+        .pipe(uglifyjs(minJsName, {
+            mangle: false
+        }))
+        .pipe(gulp.dest(dest));
+
+    //gulp.src(src)
+    //    .pipe(ts({
+    //        "target": "ES5",
+    //        "module": "system",
+    //        "moduleResolution": "node",
+    //        "sourceMap": true,
+    //        "emitDecoratorMetadata": true,
+    //        "experimentalDecorators": true,
+    //        "removeComments": false,
+    //        "noImplicitAny": false,
+    //        "outName": jsName
+    //    }))
+    //    .js
+    //    .pipe(gulp.dest(dest))
+    //    .pipe(uglifyjs(minJsName, {mangle: false, compress: false}))
+    //    .pipe(gulp.dest(dest));
     
 });
 

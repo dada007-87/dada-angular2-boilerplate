@@ -7,11 +7,12 @@
 
     <title>DaDa Scaffold Test page</title>
 
-    <base href="/dada-scaffold/">
+    <base href="/dada-angular2-boilerplate/">
 
     <!-- 1. Load libraries -->
     <!-- IE required polyfills, in this exact order -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>-->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.16/system-polyfills.js"></script>
 
     <script src="https://code.angularjs.org/2.0.0-beta.0/angular2-polyfills.js"></script>
@@ -24,7 +25,7 @@
 
     <!--DEVEL-->
     <!--<link href="content/css/styles.css" rel="stylesheet" />-->
-    <script src="content/scripts/app.js"></script>
+    <!--<script src="content/scripts/app.js"></script>-->
     <!--<script src="content/scripts/scripts.js"></script>-->
 
     <!--PROD-->
@@ -34,17 +35,17 @@
 
     <!-- 2. Configure SystemJS -->
     <script>
-//        System.config({
-//            transpiler: 'typescript',
-//            typescriptOptions: { emitDecoratorMetadata: true },
-//            packages: {'app': {defaultExtension: 'ts'}}
-//        });
-//        System.import('app/boot')
-//                .then(null, console.error.bind(console));
+        System.config({
+            transpiler: 'typescript',
+            typescriptOptions: { emitDecoratorMetadata: true },
+            packages: {'app': {defaultExtension: 'ts'}}
+        });
+        System.import('app/boot')
+                .then(null, console.error.bind(console));
 
-//        System.config({
-//            packages: { 'js': { defaultExtension: 'js' } }
-//        });
+        System.config({
+            packages: { 'js': { defaultExtension: 'js' } }
+        });
 //
 //        System.import('content/scripts/app.js').catch(console.error.bind(console));
     </script>
